@@ -8,8 +8,7 @@ import { Repository } from 'typeorm';
 export class CategoryRepository {
     constructor (@InjectRepository(CategoryEntity) private categoryrepositoryEntity: Repository<CategoryEntity>){}
 
-
-    async getAll(): Promise<CategoryEntity[]>{
+    public async getAll(): Promise<CategoryEntity[]>{
         return  await this.categoryrepositoryEntity.find();
     }
 
