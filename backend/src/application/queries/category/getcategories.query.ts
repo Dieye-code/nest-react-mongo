@@ -3,7 +3,7 @@ import { CategoryRepository } from "src/infrastructure/repository/category.repos
 import {Injectable, Inject} from '@nestjs/common'
 
 @Injectable()
-export class GetCategories{
+export class GetCategoriesQuery{
     constructor (@Inject(CategoryRepository)private categoryRepository: CategoryRepository){}
 
     public async handle(): Promise<CategoryEntity[]>{
