@@ -1,8 +1,10 @@
 import {Injectable} from '@nestjs/common'
+import { ApiProperty } from '@nestjs/swagger';
 import { CategoryEntity } from "src/infrastructure/entities/category.entity";
 import { CategoryRepository } from "src/infrastructure/repository/category.repository";
 
 export class CreateCategoryCommand {
+    @ApiProperty()
     libelle: string;
 }
 

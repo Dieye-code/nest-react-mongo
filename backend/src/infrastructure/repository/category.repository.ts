@@ -23,18 +23,20 @@ export class CategoryRepository {
         return result;
     }
 
-    public async update(category: CategoryEntity): Promise<void> {
-        var c = await this.categoryrepositoryEntity.findOneBy({ id: category.id });        
+    public async update(category: CategoryEntity): Promise<CategoryEntity> {
+        var c = await this.categoryrepositoryEntity.findOneBy({ id: category.id });
         if (c != null) {
             c.libelle = category.libelle;
             await this.categoryrepositoryEntity.save(c);
         }
+        return c;
     }
 
-    public async delete(id: number): Promise<void> {
+    public async delete(id: number): Promise<CategoryEntity> {
         var category = await this.categoryrepositoryEntity.findOneBy({ id: id });
         if (category != null)
-            this.categoryrepositoryEntity.remove(category);
+            await this.categoryrepositoryEntity.remove(category);
+        return category
     }
 
 }
