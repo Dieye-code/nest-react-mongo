@@ -14,7 +14,27 @@ export class CategoryRepository {
 
     public async get(id: number): Promise<CategoryEntity> {
 
-        return await this.categoryrepositoryEntity.findOne({where: {id: id}});
+        return await this.categoryrepositoryEntity.findOneBy({ id: id });
+    }
+
+    public async create(category: CategoryEntity): Promise<CategoryEntity> {
+
+        const result = await this.categoryrepositoryEntity.save(category);
+        return result;
+    }
+
+    public async update(category: CategoryEntity): Promise<void> {
+        var c = await this.categoryrepositoryEntity.findOneBy({ id: category.id });
+        if (c != null) {
+            c.libelle = category.libelle;
+            await this.categoryrepositoryEntity.save(c);
+        }
+    }
+
+    public async delete(id: number): Promise<void> {
+        var category = await this.categoryrepositoryEntity.findOneBy({ id: id });
+        if (category != null)
+            this.categoryrepositoryEntity.remove(category);
     }
 
 }
