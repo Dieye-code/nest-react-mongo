@@ -24,7 +24,7 @@ export class CategoryRepository {
     }
 
     public async update(category: CategoryEntity): Promise<void> {
-        var c = await this.categoryrepositoryEntity.findOneBy({ id: category.id });
+        var c = await this.categoryrepositoryEntity.findOneBy({ id: category.id });        
         if (c != null) {
             c.libelle = category.libelle;
             await this.categoryrepositoryEntity.save(c);
