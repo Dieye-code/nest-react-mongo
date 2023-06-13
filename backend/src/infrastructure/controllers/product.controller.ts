@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Res, Param, Post, Body, Put, Delete } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Res, Param, Post, Body, Put, Delete, NotFoundException } from '@nestjs/common';
 import { CreateCategoryCommand, CreateCategoryCommandHandler } from 'src/application/commands/category/createCategory.command';
 import { FindCategoryByIdQuery } from 'src/application/queries/category/findCategory.query';
 import { GetCategoriesQuery } from 'src/application/queries/category/getcategories.query';
@@ -24,6 +24,9 @@ export class ProductController {
     @Get(':id')
     public async getCategoryById(@Res() request, @Param('id') id: number) :Promise<any>{
         var category = await this.findCategory.handle(id);
+        if(category == null){
+            throw new NotFoundException("Category Not Found")
+        }
         return request.status(HttpStatus.OK).json(category)
     }
 
@@ -36,6 +39,9 @@ export class ProductController {
     @Put(':id')
     public async update(@Res() request, @Body() command : UpdateCategoryCommand, @Param('id')id: number): Promise<any>{
         var category = await this.updateCategory.handle(command);
+        if(category == null){
+            throw new NotFoundException("Category not found");
+        }
         return request.status(HttpStatus.OK).json(category);
     }
 
