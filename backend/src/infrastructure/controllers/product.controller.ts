@@ -1,9 +1,9 @@
-import { Controller, Get, HttpStatus, Res, Param, Post, Body, Put } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Res, Param, Post, Body, Put, Delete } from '@nestjs/common';
 import { CreateCategoryCommand, CreateCategoryCommandHandler } from 'src/application/commands/category/createCategory.command';
 import { FindCategoryByIdQuery } from 'src/application/queries/category/findCategory.query';
 import { GetCategoriesQuery } from 'src/application/queries/category/getcategories.query';
-import { CategoryRepository } from '../repository/category.repository';
 import { UpdateCategoryCommand, UpdateCategoryCommandHandle } from 'src/application/commands/category/updateCategory.command';
+import { DeleteCategoryCommand } from 'src/application/commands/category/deletecategory.command';
 
 @Controller('products/')
 export class ProductController {
@@ -11,7 +11,8 @@ export class ProductController {
         private getcategories: GetCategoriesQuery,
         private findCategory: FindCategoryByIdQuery,
         private createCategory: CreateCategoryCommandHandler,
-        private updateCategory: UpdateCategoryCommandHandle
+        private updateCategory: UpdateCategoryCommandHandle,
+        private deleteCategory: DeleteCategoryCommand
         ){}
 
     @Get()
@@ -38,7 +39,11 @@ export class ProductController {
         return request.status(HttpStatus.OK).json(category);
     }
 
-    
+    @Delete(':id')
+    public async delete(@Res() request, @Param('id')id: number): Promise<any>{
+        var category = await this.deleteCategory.handle(id);
+        return request.status(HttpStatus.OK).json(category);
+    }
 
 
 }

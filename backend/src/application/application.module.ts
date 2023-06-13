@@ -4,10 +4,11 @@ import { RepositoryModule } from 'src/infrastructure/repository/repository.modul
 import { FindCategoryByIdQuery } from './queries/category/findCategory.query';
 import { CreateCategoryCommandHandler } from './commands/category/createCategory.command';
 import { UpdateCategoryCommandHandle } from './commands/category/updateCategory.command';
+import { DeleteCategoryCommand } from './commands/category/deletecategory.command';
 
 @Module({
     imports: [RepositoryModule],
-    providers: [GetCategoriesQuery, FindCategoryByIdQuery, CreateCategoryCommandHandler, UpdateCategoryCommandHandle],
-    exports: [GetCategoriesQuery,FindCategoryByIdQuery, CreateCategoryCommandHandler,UpdateCategoryCommandHandle]
+    providers: [GetCategoriesQuery, FindCategoryByIdQuery, CreateCategoryCommandHandler, UpdateCategoryCommandHandle, DeleteCategoryCommand],
+    exports: [GetCategoriesQuery,FindCategoryByIdQuery, CreateCategoryCommandHandler,UpdateCategoryCommandHandle, DeleteCategoryCommand]
 })
 export class ApplicationModule {}
