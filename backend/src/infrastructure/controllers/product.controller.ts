@@ -48,6 +48,8 @@ export class ProductController {
     @Delete(':id')
     public async delete(@Res() request, @Param('id')id: number): Promise<any>{
         var category = await this.deleteCategory.handle(id);
+        if(category == null)
+            throw new NotFoundException("Category not found");
         return request.status(HttpStatus.OK).json(category);
     }
 
