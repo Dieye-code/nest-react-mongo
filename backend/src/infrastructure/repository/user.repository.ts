@@ -2,6 +2,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "../entities/user.entity";
 import { Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
+import { User } from "src/domaine/models/User";
 
 @Injectable()
 export class UserRepository {
@@ -15,17 +16,37 @@ export class UserRepository {
         return await this.userRepository.findOneBy({ id: id });
     }
 
-    public async create(user: UserEntity): Promise<UserEntity>{
+    public async create(user: UserEntity): Promise<UserEntity> {
         return await this.userRepository.create(user);
     }
 
-    public async update(user: UserEntity): Promise<UserEntity>{
+    public async update(user: User): Promise<User> {
 
-        var userUpdate = await this.userRepository.findOneBy({id: user.id})
-
+        var userUpdate = await this.userRepository.findOneBy({ id: user.getId() })
+        if (userUpdate != null) {
+            var u = User.toModel(userUpdate);
+            u.update(user.getFirstName(), user.getLastName(), user.getUserName(), user.getRole())
+            userUpdate = await this.userRepository.save(u.toEntity());
+            return User.toModel(userUpdate);
+        }
         return null;
 
     }
+
+    public async auth(username: string, password: string): Promise<User> {
+
+        var user = await this.userRepository.findOneBy({ username: username });
+        if (user != null) {
+            var userModel = User.toModel(user)
+            userModel.setPasswordHash(user.password);
+            if (await userModel.isMatch(password))
+                return userModel;
+            return null;
+        }
+        return null;
+    }
+
+
 
 
 }
