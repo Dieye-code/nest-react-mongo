@@ -5,10 +5,13 @@ import { ApplicationModule } from 'src/application/application.module';
 import { UserController } from './controllers/user/user.controller';
 import { UserModule } from 'src/application/user/user.module';
 import { CategoryModule } from 'src/application/category/category.module';
+import { EnvironmentConfigModule } from './config/environment-config/environment-config.module';
 
 @Module({
 
-  controllers: [UserController]
+  controllers: [UserController],
+
+  imports: [EnvironmentConfigModule]
 })
 export class InfrastructureModule {
     static forRoot(setting: any): DynamicModule {
