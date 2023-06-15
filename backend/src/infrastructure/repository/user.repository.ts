@@ -16,6 +16,10 @@ export class UserRepository {
         return await this.userRepository.findOneBy({ id: id });
     }
 
+    public async findByUsername(username: string){
+        return await this.userRepository.findOneBy({username : username})
+    }
+
     public async create(user: User): Promise<User> {
         var u = await this.userRepository.save(user.toEntity());
         return User.toModel(u);

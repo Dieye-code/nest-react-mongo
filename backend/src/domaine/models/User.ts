@@ -32,8 +32,8 @@ export class User {
         this.updateddate = updateddate;
     }
 
-    public  setPassword(password: string) {
-        this.password =  bcrypt.hashSync(password, 10);
+    public setPassword(password: string) {
+        this.password = bcrypt.hashSync(password, bcrypt.genSaltSync());
     }
 
 
@@ -41,8 +41,8 @@ export class User {
         this.password = password
     }
 
-    public async isMatch(password: string): Promise<boolean> {
-        return await bcrypt.compareSync(password, this.password);
+    public isMatch(password: string): boolean {
+        return bcrypt.compareSync(password, this.password);
     }
 
     public getId(): number {
