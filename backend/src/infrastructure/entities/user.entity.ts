@@ -19,7 +19,7 @@ export class UserEntity{
     @Column('varchar', {length: 100})
     password: string;
 
-    @Column('int')
+    @Column({type: 'enum', enum: Role, default: Role.User})
     role: Role
 
     @CreateDateColumn({ name: 'createdate' })
