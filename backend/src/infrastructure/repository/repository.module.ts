@@ -3,12 +3,14 @@ import { TypeormConfigModule } from '../config/typeorm/typeorm.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryEntity } from '../entities/category.entity';
 import { CategoryRepository } from './category.repository';
+import { UserEntity } from '../entities/user.entity';
+import { UserRepository } from './user.repository';
 
 @Module({
     imports: [
-        TypeormConfigModule, TypeOrmModule.forFeature([CategoryEntity])
+        TypeormConfigModule, TypeOrmModule.forFeature([CategoryEntity, UserEntity])
     ],
-    providers: [CategoryRepository],
-    exports: [CategoryRepository]
+    providers: [CategoryRepository, UserRepository],
+    exports: [CategoryRepository, UserRepository]
 })
 export class RepositoryModule {}

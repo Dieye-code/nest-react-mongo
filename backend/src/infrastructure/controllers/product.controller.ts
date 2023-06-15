@@ -1,9 +1,9 @@
 import { Controller, Get, HttpStatus, Res, Param, Post, Body, Put, Delete, NotFoundException } from '@nestjs/common';
-import { CreateCategoryCommand, CreateCategoryCommandHandler } from 'src/application/commands/category/createCategory.command';
-import { FindCategoryByIdQuery } from 'src/application/queries/category/findCategory.query';
-import { GetCategoriesQuery } from 'src/application/queries/category/getcategories.query';
-import { UpdateCategoryCommand, UpdateCategoryCommandHandle } from 'src/application/commands/category/updateCategory.command';
-import { DeleteCategoryCommand } from 'src/application/commands/category/deletecategory.command';
+import { CreateCategoryCommand, CreateCategoryCommandHandler } from 'src/application/category/commands/createCategory.command';
+import { DeleteCategoryCommand } from 'src/application/category/commands/deletecategory.command';
+import { UpdateCategoryCommand, UpdateCategoryCommandHandle } from 'src/application/category/commands/updateCategory.command';
+import { FindCategoryByIdQuery } from 'src/application/category/queries/findCategory.query';
+import { GetCategoriesQuery } from 'src/application/category/queries/getcategories.query';
 
 @Controller('products/')
 export class ProductController {

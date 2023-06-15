@@ -16,8 +16,9 @@ export class UserRepository {
         return await this.userRepository.findOneBy({ id: id });
     }
 
-    public async create(user: UserEntity): Promise<UserEntity> {
-        return await this.userRepository.create(user);
+    public async create(user: User): Promise<User> {
+        var u = await this.userRepository.save(user.toEntity());
+        return User.toModel(u);
     }
 
     public async update(user: User): Promise<User> {

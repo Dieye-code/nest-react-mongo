@@ -1,14 +1,9 @@
 import { Module } from '@nestjs/common';
-import { GetCategoriesQuery } from './queries/category/getcategories.query';
+import { UserModule } from './user/user.module';
+import { CategoryModule } from './category/category.module';
 import { RepositoryModule } from 'src/infrastructure/repository/repository.module';
-import { FindCategoryByIdQuery } from './queries/category/findCategory.query';
-import { CreateCategoryCommandHandler } from './commands/category/createCategory.command';
-import { UpdateCategoryCommandHandle } from './commands/category/updateCategory.command';
-import { DeleteCategoryCommand } from './commands/category/deletecategory.command';
 
 @Module({
-    imports: [RepositoryModule],
-    providers: [GetCategoriesQuery, FindCategoryByIdQuery, CreateCategoryCommandHandler, UpdateCategoryCommandHandle, DeleteCategoryCommand],
-    exports: [GetCategoriesQuery,FindCategoryByIdQuery, CreateCategoryCommandHandler,UpdateCategoryCommandHandle, DeleteCategoryCommand]
+    imports: [ RepositoryModule,UserModule, CategoryModule]
 })
 export class ApplicationModule {}
