@@ -32,19 +32,20 @@ export class User {
         this.updateddate = updateddate;
     }
 
-    public async setPassword(password: string) {
-        this.password = await bcrypt.hashSync(password, 10);
+    public  setPassword(password: string) {
+        this.password =  bcrypt.hashSync(password, 10);
     }
 
-    public setPasswordHash(password: string){
+
+    public setPasswordHash(password: string) {
         this.password = password
     }
 
-    public async isMatch(password: string): Promise<boolean>{
+    public async isMatch(password: string): Promise<boolean> {
         return await bcrypt.compareSync(password, this.password);
     }
 
-    public getId(): number{
+    public getId(): number {
         return this.id;
     }
 
@@ -79,6 +80,8 @@ export class User {
         user.lastname = this.lastName;
         user.username = this.userName;
         user.role = this.role;
+        if (this.password != null)
+            user.password = this.password;
         return user;
     }
 

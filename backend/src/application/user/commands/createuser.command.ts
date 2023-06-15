@@ -19,7 +19,7 @@ export class CreateUserCommand{
     @ApiProperty({minLength: 6, maxLength: 12})
     password: string
 
-    @ApiProperty()
+    @ApiProperty({type: "enum", enum: Role})
     role: Role
 }
 
@@ -30,8 +30,7 @@ export class CreateUserCommandHandler{
     public async handle(command: CreateUserCommand): Promise<User>{
 
         var user= new User(null, command.firstName, command.lastName, command.userName, command.role)
-        user.setPassword(command.password);
-
+        user.setPassword(command.password);    
         return await this.userRepository.create(user);
 
     }
