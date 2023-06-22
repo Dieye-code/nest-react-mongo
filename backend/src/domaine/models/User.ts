@@ -12,6 +12,8 @@ export class User {
     private role: Role;
     private createddate: Date;
     private updateddate: Date;
+    private lastlogin: Date;
+    private hach_refresh_token: string
 
     constructor(id: number, firstName: string, lastName: string, userName: string, role: Role, createddate?: Date, updateddate?: Date) {
         this.id = id;

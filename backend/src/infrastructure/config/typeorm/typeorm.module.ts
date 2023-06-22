@@ -1,19 +1,12 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { TypeOrmService } from './typeorm.servise';
+import { EnvironmentConfigModule } from '../environment-config/environment-config.module';
 
-export const getTypeOrmModuleOptions =() : TypeOrmModuleOptions => ({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'crudnest',
-    entities: [__dirname+'./../../**/*.entity{.ts,.js}'],
-    synchronize: true
-} as TypeOrmModuleOptions)
 
 
 @Module({
-    imports: [TypeOrmModule.forRootAsync({useFactory: getTypeOrmModuleOptions})]
+    imports: [TypeOrmModule.forRootAsync({imports:[EnvironmentConfigModule], useClass: TypeOrmService, inject: [TypeOrmService]})]
 })
 export class TypeormConfigModule {}

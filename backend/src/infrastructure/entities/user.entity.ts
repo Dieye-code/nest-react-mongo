@@ -28,4 +28,10 @@ export class UserEntity{
     @UpdateDateColumn({ name: 'updateddate' })
     updateddate: Date;
 
+    @Column({ nullable: true })
+    last_login?: Date;
+  
+    @Column('varchar', { nullable: true })
+    hach_refresh_token: string;
+
 }

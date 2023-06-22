@@ -5,6 +5,7 @@ import { CategoryEntity } from '../entities/category.entity';
 import { CategoryRepository } from './category.repository';
 import { UserEntity } from '../entities/user.entity';
 import { UserRepository } from './user.repository';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [

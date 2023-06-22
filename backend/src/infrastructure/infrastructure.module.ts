@@ -6,10 +6,11 @@ import { UserController } from './controllers/user/user.controller';
 import { UserModule } from 'src/application/user/user.module';
 import { CategoryModule } from 'src/application/category/category.module';
 import { EnvironmentConfigModule } from './config/environment-config/environment-config.module';
+import { CategoryController } from './controllers/category/category.controller';
 
 @Module({
 
-  controllers: [UserController],
+  controllers: [UserController, CategoryController],
 
   imports: [EnvironmentConfigModule]
 })

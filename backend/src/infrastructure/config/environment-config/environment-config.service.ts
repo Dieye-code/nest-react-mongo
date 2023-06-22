@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DatabaseConfig } from 'src/domaine/config/database.interface';
 import { JWTConfig } from 'src/domaine/config/jwt.interface';
 
